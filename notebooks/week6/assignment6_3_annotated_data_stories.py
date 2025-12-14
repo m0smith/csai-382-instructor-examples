@@ -14,8 +14,46 @@
 # MAGIC - ✅ Build simple features for balance risk
 # MAGIC - ✅ Train and explain a tiny ML model
 # MAGIC - ✅ Think about responsible AI and gospel insights
-# MAGIC 
+# MAGIC
 # MAGIC *Tip:* Cells that start with `%md` are Markdown (text). Cells without `%` are Python. Use the ▶️ play button to run each cell.
+# COMMAND ----------
+# MAGIC %md
+# MAGIC ### Quick "bad data story" vs. annotated version
+# MAGIC - **Bad example (what not to do):** show a chart with no labels, give a vague claim.
+# MAGIC - **Better example:** same chart, but add a clear title, labels, and a short takeaway.
+# MAGIC - Use this slide to discuss why context and annotations matter.
+# COMMAND ----------
+import matplotlib.pyplot as plt
+
+months = ["Jan", "Feb", "Mar", "Apr"]
+values = [30, 45, 25, 50]
+
+fig, axes = plt.subplots(1, 2, figsize=(10, 4), sharey=True)
+
+# Bad story: no labels, vague note
+axes[0].bar(months, values, color="gray")
+axes[0].set_title("Vague chart")
+axes[0].text(0.1, 48, "Looks fine?", fontsize=10)
+
+# Annotated story: labels + specific takeaway
+axes[1].bar(months, values, color="steelblue")
+axes[1].set_title("Clinic visits by month")
+axes[1].set_xlabel("Month")
+axes[1].set_ylabel("# Visits")
+axes[1].axhline(40, color="red", linestyle="--", linewidth=1)
+axes[1].text(2.2, 42, "🔴 Feb spike—check staffing", color="red", fontsize=9)
+axes[1].text(1.0, 12, "Add note: Promo in Feb?", fontsize=9)
+
+plt.suptitle("Bad vs. annotated data story", fontsize=14)
+plt.tight_layout()
+plt.show()
+# COMMAND ----------
+# MAGIC %md
+# MAGIC ### Stakeholder persona (communication target)
+# MAGIC - **Audience:** Clinic Director (non-technical)
+# MAGIC - **Cares about:** Safety, false alarms, trust
+# MAGIC - **Does NOT care about:** Hyperparameters
+# MAGIC - **Tip:** Keep language plain, connect to patient impact.
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 1) Quick intro: STEDI Rapid Step Test
@@ -206,6 +244,10 @@ print("Recall", rec)
 print("Confusion matrix:\n", cm)
 # COMMAND ----------
 # MAGIC %md
+# MAGIC ### Reflection before explainability
+# MAGIC If most training data comes from younger users, what might go wrong? Write one risk in plain language (no code) before we look at SHAP.
+# COMMAND ----------
+# MAGIC %md
 # MAGIC ## 7) Model interpretation
 # MAGIC - **Feature importance:** how much each feature moves the prediction (absolute logistic weights here).
 # MAGIC - **Global vs local:** global = overall patterns; local = one row's explanation.
@@ -231,6 +273,7 @@ plt.show()
 # MAGIC - SHAP shows how each feature pushes a prediction.
 # MAGIC - Global summary = overall influence; Local = one prediction.
 # MAGIC - If import fails, explain conceptually and move on.
+# MAGIC - **Legend:** Red = pushes prediction higher. Blue = pushes prediction lower. Size shows strength.
 # COMMAND ----------
 try:
     import shap
@@ -259,8 +302,12 @@ except Exception as e:
 # MAGIC - Ask: What data is missing? How could that bias results?
 # MAGIC - Ask: How will we keep humans in the loop? (coach, nurse, student)
 # MAGIC - Ask: How do we communicate limits? (precision/recall, small sample)
-# MAGIC 
+# MAGIC
 # MAGIC **Gospel thought:** "By their fruits ye shall know them" (Matthew 7:16). We judge models by outcomes: Are we serving people with love and humility? Are we honest about risks?
+# COMMAND ----------
+# MAGIC %md
+# MAGIC ### What would you say out loud?
+# MAGIC Imagine you have **60 seconds** with a manager. In one or two sentences, what would you say about this model's strengths, risks, and next step?
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 9) 🧪 Try it yourself prompts

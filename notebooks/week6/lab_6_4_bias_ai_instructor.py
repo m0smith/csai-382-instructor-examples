@@ -13,8 +13,14 @@
 # MAGIC - Build pipelines that are reproducible and ethical.
 # MAGIC - Detect and discuss bias in data and models.
 # MAGIC - Communicate findings with simple visuals.
-# MAGIC 
+# MAGIC
 # MAGIC > Teacher tip: Keep sentences short. Pause often for comprehension checks.
+# MAGIC
+# MAGIC **Stakeholder persona (aim your language):**
+# MAGIC - Audience: Clinic Director (non-technical)
+# MAGIC - Cares about: Safety, false alarms, trust
+# MAGIC - Does not care about: Hyperparameters or optimizer tricks
+# MAGIC - Use plain speech first; numbers second.
 
 # COMMAND ----------
 # MAGIC %md
@@ -239,9 +245,15 @@ print("Confusion Matrix:\n", cm)
 
 # COMMAND ----------
 # MAGIC %md
+# MAGIC **Reflection before SHAP (no code):**
+# MAGIC If most training data comes from younger users, what might go wrong for older patients? Write one sentence the class can discuss.
+
+# COMMAND ----------
+# MAGIC %md
 # MAGIC ## 6. SHAP Explainability
-# MAGIC 
+# MAGIC
 # MAGIC **Why this matters:** SHAP shows what the model pays attention to. If one feature dominates, investigate bias.
+# MAGIC - Legend reminder: **Red = pushes prediction higher**, **Blue = pushes prediction lower**. Bigger points = stronger impact.
 
 # COMMAND ----------
 import shap
